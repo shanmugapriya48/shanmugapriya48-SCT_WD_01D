@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 400px; margin: auto; padding: 20px; border: 2px solid #ccc; border-radius: 10px; background-color: #f9f9f9; }
+    h2 { text-align: center; }
+    label { display: block; margin: 10px 0; }
+    select, input { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; }
+    button:hover { background-color: #45a049; }
+    .result { font-weight: bold; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Temperature Converter</h2>
+    <label for="temperature">Enter Temperature:</label>
+    <input type="number" id="temperature" placeholder="Enter temperature" />
+    <label for="unit">Select Unit:</label>
+    <select id="unit">
+      <option value="celsius">Celsius (°C)</option>
+      <option value="fahrenheit">Fahrenheit (°F)</option>
+      <option value="kelvin">Kelvin (K)</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    function convertTemperature() {
+      let temperature = parseFloat(document.getElementById('temperature').value);
+      let unit = document.getElementById('unit').value;
+      let resultText = '';
+      if (isNaN(temperature)) {
+        resultText = 'Please enter a valid number for temperature.';
+      } else {
+        switch (unit) {
+          case 'celsius':
+            resultText = `Fahrenheit: ${(temperature * 9/5) + 32} °F <br> Kelvin: ${temperature + 273.15} K`;
+            break;
+          case 'fahrenheit':
+            resultText = `Celsius: ${(temperature - 32) * 5/9} °C <br> Kelvin: ${((temperature - 32) * 5/9) + 273.15} K`;
+            break;
+          case 'kelvin':
+            resultText = `Celsius: ${temperature - 273.15} °C <br> Fahrenheit: ${(temperature - 273.15) * 9/5 + 32} °F`;
+            break;
+          default:
+            resultText = 'Please select a unit.';
+        }
+      }
+      document.getElementById('result').innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>
